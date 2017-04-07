@@ -1,11 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ListViewError"
-             x:Class="ListViewError.MainPage">
-
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
-
+             x:Class="ListViewError.MainPage"
+             x:Name="Page"
+             BindingContext="{x:Reference Page}">
+    <StackLayout Orientation="Vertical">
+        <Button Clicked="MenuItem_OnClicked" Text="Remove First Item" />
+        <ListView ItemsSource="{Binding Items}" ItemSelected="ListView_OnItemSelected" HasUnevenRows="True" RowHeight="-1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label IsVisible="{Binding Expand}" Text="Expanded" VerticalTextAlignment="Center"
+                                   HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding Id}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>
