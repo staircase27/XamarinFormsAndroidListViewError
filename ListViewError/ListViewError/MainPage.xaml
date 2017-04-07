@@ -7,7 +7,7 @@
              BindingContext="{x:Reference Page}">
     <StackLayout Orientation="Vertical">
         <Button Clicked="MenuItem_OnClicked" Text="Remove First Item" />
-        <ListView ItemsSource="{Binding Items}" ItemSelected="ListView_OnItemSelected" HasUnevenRows="True" RowHeight="-1">
+        <ListView ItemSelected="ListView_OnItemSelected" HasUnevenRows="True" RowHeight="-1" x:Name="ListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

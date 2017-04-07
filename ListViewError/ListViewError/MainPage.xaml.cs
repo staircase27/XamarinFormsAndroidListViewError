@@ -28,6 +28,7 @@ namespace ListViewError
         {
             _items = new ObservableCollection<Item>(Enumerable.Range(0, 10).Select(i => new Item(i)));
             InitializeComponent();
+            ListView.ItemsSource = Items;
         }
 
 
@@ -80,7 +81,13 @@ namespace ListViewError
         }
 
 
-        private void MenuItem_OnClicked(object sender, EventArgs e) => _items.RemoveAt(0);
+        private void MenuItem_OnClicked(object sender, EventArgs e)
+        {
+            _items.RemoveAt(0);
+            ListView.ItemsSource = null;
+            ListView.ItemsSource = Items;
+        }
+
 
         private Item _selectedItem;
         private readonly ObservableCollection<Item> _items;
