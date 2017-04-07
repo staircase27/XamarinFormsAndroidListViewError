@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
@@ -75,7 +76,10 @@ namespace ListViewError
         {
             if (_selectedItem != null)
                 _selectedItem.Expand = false;
-            _selectedItem = e.SelectedItem as Item;
+            var selectedItem = e.SelectedItem as Item;
+            Debug.WriteLine(
+                $"Selected Item Changed: {_selectedItem?.Id} ({_selectedItem}) -> {selectedItem?.Id} ({e.SelectedItem})");
+            _selectedItem = selectedItem;
             if (_selectedItem != null)
                 _selectedItem.Expand = true;
         }
@@ -84,8 +88,11 @@ namespace ListViewError
         private void MenuItem_OnClicked(object sender, EventArgs e)
         {
             _items.RemoveAt(0);
+            Item selectedItem = _selectedItem;
+            ListView.SelectedItem = null;
             ListView.ItemsSource = null;
             ListView.ItemsSource = Items;
+            ListView.SelectedItem = selectedItem;
         }
 
 
